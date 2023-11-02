@@ -10,10 +10,10 @@ const secret = 'veryverysecretamikawkbolbona'
 //parsers
 app.use(express.json())
 app.use(cookieParser())
-app.use({
+app.use(cors({
     origin:'http://localhost:5173',
     credentials: true
-})
+}))
 
 //DB URI
 const uri = "mongodb+srv://admin:admin@cluster0.awbitmm.mongodb.net/clean-co?retryWrites=true&w=majority";
@@ -122,10 +122,9 @@ async function run() {
             // res.send(token)
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: false,
+                secure: true,
                 sameSite: 'none'
             }).send({ success: true })
-
         })
 
         // Send a ping to confirm a successful connection
